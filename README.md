@@ -9,6 +9,7 @@ The **Event Management Platform** is a full-stack web application that allows us
 ## 🌐 Live Demo
 
 🔗 **Frontend:** https://event-management-platform-9qgy.onrender.com
+
 🔗 **Backend:** https://event-management-von8.onrender.com
 
 ---
