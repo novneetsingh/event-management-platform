@@ -1,75 +1,75 @@
-# 📝 Notes App
+# 🎟️ Event Management Platform
 
-The **Notes App** is a full-stack web application that allows users to create, manage, and organize their notes. Users can add notes using text input or voice recording, with the latter being transcribed to text using the Browser Web Speech API. The app includes authentication, search functionality, and various note management features.
+## 📌 Project Description
 
----
-
-## 🌐 **Live Demo**
-
-🔗 https://notes-app-q6ec.onrender.com
+The **Event Management Platform** is a full-stack web application that allows users to create, manage, and view events. It features user authentication, event creation tools, real-time attendee updates. The app is designed to be **responsive**, **secure**, and **scalable**.
 
 ---
 
-## 🚀 **Features**
+## 🌐 Live Demo
+
+🔗 **Frontend:** https://event-management-platform-9qgy.onrender.com
+🔗 **Backend:** https://event-management-von8.onrender.com
+
+---
+
+## 🚀 Features
 
 ### 🔹 **User Authentication**
 
-- Sign-up and login functionality using **JWT authentication**.
-- Secure storage of user credentials.
+- Secure login and registration using **JWT authentication**.
 
-### 🔹 **Note Management**
+### 🔹 **Event Management**
 
-- Create notes using **text input** or **voice recording**.
-- Audio notes are transcribed into text using the **Browser Web Speech API**.
-- Notes are **stored in MongoDB** and linked to the user.
+- **Create and delete** events with details like title, description, date, and venue.
+- View a list of **upcoming and past events** with filters.
+- Only event creators can delete their own events.
 
-### 🔹 **Sorting & Searching**
+### 🔹 **Real-Time Updates**
 
-- Users can **search** notes by title or content in real-time.
-- Sort notes from **oldest to newest**.
+- **WebSockets (Socket.io)** for real-time attendee tracking.
+- Users can see who is currently attending an event.
 
-### 🔹 **Note Actions**
+### 🔹 **Responsive Design**
 
-- **Copy to clipboard**.
-- **Delete notes**.
-- **Rename notes**.
-- **Edit notes**.
-- **Favorite notes**.
-- **View notes in a modal with fullscreen support**.
-
-### 🔹 **Image Upload**
-
-- Users can upload an image as part of a note.
+- Fully mobile-friendly UI using **Tailwind CSS**.
 
 ---
 
-## 🛠 **Technologies Used**
+## 🛠 **Tech Stack**
 
-| Technology         | Description            |
-| ------------------ | ---------------------- |
-| **Frontend**       | React.js, Tailwind CSS |
-| **Backend**        | Node.js, Express.js    |
-| **Database**       | MongoDB (Mongoose)     |
-| **Authentication** | JSON Web Tokens (JWT)  |
-| **Speech API**     | Browser Web Speech API |
+| Technology     | Description            |
+| -------------- | ---------------------- |
+| **Frontend**   | React.js, Tailwind CSS |
+| **Backend**    | Node.js, Express.js    |
+| **Database**   | MongoDB                |
+| **Auth**       | JSON Web Tokens (JWT)  |
+| **Real-Time**  | Socket.io              |
+| **Deployment** | Render                 |
 
 ---
 
 ## 📂 **Project Structure**
 
 ```
-notes-app/
+event-management-platform/
 ├── client/  # React frontend
 │   ├── src/
-│   ├── public/
-│   └── package.json
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── utils/
+│   │   └── App.js
 ├── server/  # Node.js backend
-│   ├── models/
-│   ├── routes/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── config/
-│   └── index.js
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   ├── config/
+│   │   ├── utils/
+│   ├── package.json
+│   ├── README.md
+│   └── indexjs
 ├── .gitignore
 ├── README.md
 └── package.json
@@ -89,38 +89,58 @@ notes-app/
 
 - **Endpoint:** `POST /user/login`
 
-### 📌 **Notes Management** (Protected Routes - Requires Token)
+### 📌 **Event Management** (Protected Routes - Requires Token)
 
-#### ✅ **Create a Note**
+#### ✅ **Create an Event**
 
-- **Endpoint:** `POST /notes/create-notes`
+- **Endpoint:** `POST /event/create`
 - **Request Body:**
   ```json
   {
-    "title": "Meeting Notes",
-    "transcribedText": "This is the transcribed text",
-    "audio": "audio-file-url"
+    "title": "Tech Conference 2025",
+    "description": "An event about latest tech trends.",
+    "date": "2025-06-15T14:00:00Z",
+    "venue": "Sydney Convention Center"
   }
   ```
 
-#### ✅ **Get All Notes**
+#### ✅ **Get All Events**
 
-- **Endpoint:** `GET /notes/all-notes`
+- **Endpoint:** `GET /event/allevents`
 
-#### ✅ **Update a Note**
+✅ Get Current User Events
 
-- **Endpoint:** `PUT /notes/update/:id`
+- Endpoint: GET /event/myevents
 
-#### ✅ **Delete a Note**
+✅ **Delete an Event**
 
-- **Endpoint:** `DELETE /notes/delete/:id`
+- **Endpoint:** `DELETE /event/delete/:id`
 
-#### ✅ **Search Notes by Title**
+#### ✅ **Join an Event (Real-Time Attendees)**
 
-- **Endpoint:** `GET /notes/search-notes?search=keyword`
-
-#### ✅ **Favorite a Note**
-
-- **Endpoint:** `PUT /notes/mark-favourite/:id`
+- **WebSocket Event:** `joinEvent`
 
 ---
+
+## 🛠 **Setup Instructions**
+
+### 🔹 **Backend Setup**
+
+```bash
+cd server
+npm install
+npm start
+```
+
+### 🔹 **Frontend Setup**
+
+```bash
+npm install
+npm start
+```
+
+---
+
+## 📢 **GitHub Repo**
+
+🔗 **GitHub Repo:** https://github.com/novneetsingh/event-management-platform
