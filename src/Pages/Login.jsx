@@ -54,6 +54,32 @@ const Login = () => {
     }
   };
 
+  // handle guest login
+  const handleGuestLogin = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/user/guest`,
+        {}
+      );
+
+      // Save token to local storage for authentication
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+
+        // decode user from token
+        const decodedToken = jwtDecode(response.data.token);
+        localStorage.setItem("currUserName", decodedToken.currUserName);
+      }
+
+      toast.success("Guest login successful!");
+
+      navigate("/dashboard"); // Redirect to dashboard
+    } catch (error) {
+      console.error("Guest login error:", error.message);
+      toast.error("Guest login failed. Please try again.");
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md w-full p-6 bg-white rounded-lg shadow-lg">
@@ -103,6 +129,13 @@ const Login = () => {
             onClick={() => navigate("/")}
           >
             Sign Up
+          </span>
+          <span className="text-gray-500 mx-2">|</span>
+          <span
+            className="text-blue-500 hover:underline cursor-pointer"
+            onClick={handleGuestLogin}
+          >
+            Login as Guest
           </span>
         </p>
       </div>

@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { Trash2, UserPlus } from "lucide-react";
 import EventModal from "../modals/EventModal";
+import toast from "react-hot-toast";
 
 const EventCard = ({ event, handleDelete, type }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleJoin = () => {
+    // if user is guest
+    if (localStorage.getItem("currUserName") === "undefined") {
+      toast.error("Please register to join an event");
+      return;
+    }
+
     setIsModalOpen(true);
   };
 

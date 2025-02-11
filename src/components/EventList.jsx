@@ -7,6 +7,12 @@ const EventList = ({ type }) => {
   const [events, setEvents] = useState([]);
 
   const fetchEvents = async () => {
+    // if user is guest
+    if (type === "my" && localStorage.getItem("currUserName") === "undefined") {
+      toast.error("Please register to view events");
+      return;
+    }
+
     try {
       const url =
         type === "my"

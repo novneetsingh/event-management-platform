@@ -11,6 +11,13 @@ const EventForm = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    // if user is guest
+    if (localStorage.getItem("currUserName") === "undefined") {
+      toast.error("Please register to create an event");
+      reset();
+      return;
+    }
+
     try {
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/event/create`,
