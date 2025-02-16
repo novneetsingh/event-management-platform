@@ -6,8 +6,6 @@ exports.initializeSocket = (server) => {
   // Initialize Socket.io
   const io = new Server(server, {
     cors: { origin: `${process.env.FRONTEND_URL}`, methods: ["GET", "POST"] },
-    pingTimeout: 5000, // 5 seconds for the server to detect disconnections
-    pingInterval: 1000, // 1 second interval for pings to the server to detect disconnections 
   });
 
   io.on("connection", (socket) => {
@@ -27,7 +25,7 @@ exports.initializeSocket = (server) => {
         activeUsers[eventId].push(userName);
       }
 
-      // console.log(`User ${userName} joined event room: ${eventId}`);
+      console.log(`User ${userName} joined event room: ${eventId}`);
 
       // Send the updated activeUsers object to the client
       io.to(eventId).emit("updateAttendees", activeUsers[eventId]);
@@ -44,7 +42,7 @@ exports.initializeSocket = (server) => {
         );
       }
 
-      console.log(`User ${userName} left event room: ${eventId}`);
+      // console.log(`User ${userName} left event room: ${eventId}`);
 
       // Send the updated activeUsers object to the client
       io.to(eventId).emit("updateAttendees", activeUsers[eventId]);

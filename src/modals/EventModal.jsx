@@ -24,7 +24,7 @@ const EventModal = ({ isOpen, onClose, event }) => {
       });
 
       return () => {
-        newSocket.disconnect();
+        newSocket.off("connect");
       };
     }
   }, [isOpen, event]);
